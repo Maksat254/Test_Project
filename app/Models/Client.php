@@ -21,11 +21,14 @@ class Client extends Model implements Sortable
         'published',
         'title',
         'description',
-        'position',
+        'name',
+        'email',
+        'phone',
+        'address',
     ];
-    
+
     public $slugAttributes = [
         'title',
     ];
-    
+
 }

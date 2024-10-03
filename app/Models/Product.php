@@ -22,10 +22,17 @@ class Product extends Model implements Sortable
         'title',
         'description',
         'position',
+        'name',
+        'type',
+        'price',
+        'color',
+        'size',
+        'name',
     ];
-    
+
     public $slugAttributes = [
         'title',
     ];
-    
+
+
 }

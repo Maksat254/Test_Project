@@ -22,10 +22,15 @@ class Order extends Model implements Sortable
         'title',
         'description',
         'position',
+        'client_id',
+        'product_id',
+        'service_id',
+        'status',
+        'details',
     ];
-    
+
     public $slugAttributes = [
         'title',
     ];
-    
+
 }

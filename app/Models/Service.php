@@ -22,10 +22,14 @@ class Service extends Model implements Sortable
         'title',
         'description',
         'position',
+        'name',
+        'price',
+        'duration',
+        'project_example',
     ];
-    
+
     public $slugAttributes = [
         'title',
     ];
-    
+
 }
