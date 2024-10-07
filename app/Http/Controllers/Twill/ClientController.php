@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Twill;
 
 use A17\Twill\Models\Contracts\TwillModelContract;
+use A17\Twill\Services\Forms\Fields\Medias;
+use A17\Twill\Services\Forms\Fields\Wysiwyg;
 use A17\Twill\Services\Listings\Columns\Text;
 use A17\Twill\Services\Listings\TableColumns;
 use A17\Twill\Services\Forms\Fields\Input;
@@ -22,6 +24,18 @@ class ClientController extends BaseModuleController
         $this->enableReorder();
     }
 
+
+    public function getCreateForm(): Form
+    {
+        return Form::make([
+            Input::make()->name('title')->label('Title '),
+            Input::make()->name('name')->label('Name'),
+            Input::make()->name('email')->label('Email'),
+            Input::make()->name('phone')->label('Phone'),
+            Input::make()->name('address')->label('Address'),
+            Wysiwyg::make()->name('description')->label('Description')
+        ]);
+    }
     /**
      * See the table builder docs for more information. If you remove this method you can use the blade files.
      * When using twill:module:make you can specify --bladeForm to use a blade form instead.
@@ -29,12 +43,14 @@ class ClientController extends BaseModuleController
     public function getForm(TwillModelContract $model): Form
     {
         $form = parent::getForm($model);
-
-        $form->add(
-            Input::make()->name('description')->label('Description')
-        );
-
-        return $form;
+        return Form::make([
+            Input::make()->name('title')->label('Title '),
+            Input::make()->name('name')->label('Name'),
+            Input::make()->name('email')->label('Email'),
+            Input::make()->name('phone')->label('Phone'),
+            Input::make()->name('address')->label('Address'),
+            Wysiwyg::make()->name('description')->label('Description')
+        ]);
     }
 
     /**
@@ -44,6 +60,21 @@ class ClientController extends BaseModuleController
     {
         $table = parent::additionalIndexTableColumns();
 
+        $table->add(
+            Text::make()->field('name')->title('Name')
+        );
+        $table->add(
+            Text::make()->field('title')->title('Title')
+        );
+        $table->add(
+            Text::make()->field('email')->title('Email')
+        );
+        $table->add(
+            Text::make()->field('phone')->title('Phone')
+        );
+        $table->add(
+            Text::make()->field('address')->title('Address')
+        );
         $table->add(
             Text::make()->field('description')->title('Description')
         );

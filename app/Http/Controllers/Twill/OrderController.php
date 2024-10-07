@@ -71,6 +71,38 @@ class   OrderController extends BaseModuleController
         $table = parent::additionalIndexTableColumns();
 
         $table->add(
+            Text::make()->field('type')->title('Type')
+        );
+
+        $table->add(
+            Text::make()->field('title')->title('Title')
+        );
+
+        $table->add(
+        Text::make()->field('client_id')->title('Client_id')
+        );
+
+        $table->add(
+            Text::make()->field('product_id')->title('Product_id')
+        );
+
+        $table->add(
+            Text::make()->field('service_id')->title('Service_id')
+        );
+
+        $table->add(
+            Text::make()->field('status')->title('Status')
+        );
+
+        $table->add(
+            Text::make()->field('details')->title('Details')
+        );
+
+        $table->add(
+            Text::make()->field('position')->title('Position')
+        );
+
+        $table->add(
             Text::make()->field('description')->title('Description')
         );
 

@@ -27,8 +27,20 @@ class Product extends Model implements Sortable
         'price',
         'color',
         'size',
-        'name',
+        'stock',
+        'cover',
     ];
+        public $mediasParams = [
+            'cover' => [
+                'default' => [
+                    [
+                        'role' => 'cover',
+                        'crop' => 'default',
+                    ],
+                ],
+            ],
+        ];
+
 
     public $slugAttributes = [
         'title',

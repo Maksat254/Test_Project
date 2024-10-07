@@ -11,6 +11,7 @@ use A17\Twill\Services\Forms\Fields\Input;
 use A17\Twill\Services\Forms\Fields\Medias;
 use A17\Twill\Services\Forms\Form;
 use A17\Twill\Http\Controllers\Admin\ModuleController as BaseModuleController;
+
 use App\Models\Product;
 
 //use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
@@ -61,7 +62,7 @@ class ProductController extends BaseModuleController
             Input::make()->name('color')->label('Color'),
             Input::make()->name('size')->label('Size'),
             Input::make()->name('stock')->label('Stock'),
-            Medias::make()->name('cover')->label('Image')->required(false),
+            Medias::make()->name('cover')->label('Cover Image')->required(false),
             Wysiwyg::make()->name('description')->label('Description')
         ]);
     }
@@ -72,6 +73,7 @@ class ProductController extends BaseModuleController
     protected function additionalIndexTableColumns(): TableColumns
     {
         $table = parent::additionalIndexTableColumns();
+
 
         $table->add(
             Text::make()->field('name')->title('Name')
@@ -91,11 +93,9 @@ class ProductController extends BaseModuleController
         $table->add(
             Text::make()->field('description')->title('Description')
         );
-//        $table->add(
-//            \A17\Twill\Services\Listings\Columns\Medias::make()->field('image')->title('Image')
-//        );
-
-
+        $table->add(
+            Text::make()->field('cover')->title('Cover')
+        );
         return $table;
     }
 }

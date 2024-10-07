@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Twill;
 
 use A17\Twill\Models\Contracts\TwillModelContract;
+use A17\Twill\Services\Forms\Fields\Medias;
+use A17\Twill\Services\Forms\Fields\Wysiwyg;
 use A17\Twill\Services\Listings\Columns\Text;
 use A17\Twill\Services\Listings\TableColumns;
 use A17\Twill\Services\Forms\Fields\Input;
@@ -22,6 +24,22 @@ class ServiceController extends BaseModuleController
         $this->enableReorder();
     }
 
+
+
+    public function getCreateForm(): Form
+    {
+        return Form::make([
+            Input::make()->name('name')->label('Name'),
+            Input::make()->name('title')->label('Title'),
+            Input::make()->name('price')->label('Price'),
+            Input::make()->name('position')->label('Position'),
+            Input::make()->name('project_example')->label('Project_example'),
+            Input::make()->name('duration')->label('Duration'),
+            Wysiwyg::make()->name('description')->label('Description')
+        ]);
+    }
+
+
     /**
      * See the table builder docs for more information. If you remove this method you can use the blade files.
      * When using twill:module:make you can specify --bladeForm to use a blade form instead.
@@ -30,13 +48,17 @@ class ServiceController extends BaseModuleController
     {
         $form = parent::getForm($model);
 
-        $form->add(
-            Input::make()->name('description')->label('Description')
-        );
+        return Form::make([
+            Input::make()->name('name')->label('Name'),
+            Input::make()->name('title')->label('Title'),
+            Input::make()->name('price')->label('Price'),
+            Input::make()->name('position')->label('Position'),
+            Input::make()->name('project_example')->label('Project_example'),
+            Input::make()->name('duration')->label('Duration'),
+            Wysiwyg::make()->name('description')->label('Description')
+        ]);
 
-        return $form;
     }
-
     /**
      * This is an example and can be removed if no modifications are needed to the table.
      */
@@ -45,9 +67,26 @@ class ServiceController extends BaseModuleController
         $table = parent::additionalIndexTableColumns();
 
         $table->add(
+            Text::make()->field('name')->title('Name')
+        );
+        $table->add(
+            Text::make()->field('price')->title('Price')
+        );
+        $table->add(
+            Text::make()->field('position')->title('Position')
+        );
+        $table->add(
+            Text::make()->field('duration')->title('Duration')
+        );
+        $table->add(
+            Text::make()->field('project_example')->title('Project_example')
+        );
+        $table->add(
             Text::make()->field('description')->title('Description')
         );
-
+        $table->add(
+            Text::make()->field('title')->title('Title')
+        );
         return $table;
     }
 }
