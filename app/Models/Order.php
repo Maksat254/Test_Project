@@ -22,9 +22,9 @@ class Order extends Model implements Sortable
         'title',
         'description',
         'position',
-        'client_id',
-        'product_id',
-        'service_id',
+        'user_id',
+        'morphable_type',
+        'morphable_id',
         'status',
         'details',
     ];
@@ -32,5 +32,10 @@ class Order extends Model implements Sortable
     public $slugAttributes = [
         'title',
     ];
+
+    public function morphable()
+    {
+        return $this->morphTo();
+    }
 
 }

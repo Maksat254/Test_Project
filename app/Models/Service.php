@@ -32,4 +32,10 @@ class Service extends Model implements Sortable
         'title',
     ];
 
+
+    public function orders()
+    {
+        return $this->morphMany(Order::class, 'morphable');
+    }
+
 }

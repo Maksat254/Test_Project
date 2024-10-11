@@ -7,5 +7,4 @@ use A17\Twill\Facades\TwillRoutes;
 
 TwillRoutes::module('products');
 TwillRoutes::module('services');
-TwillRoutes::module('clients');
 TwillRoutes::module('orders');

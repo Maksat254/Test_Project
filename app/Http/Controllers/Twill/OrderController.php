@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Twill;
 
 use A17\Twill\Models\Contracts\TwillModelContract;
+use A17\Twill\Services\Forms\Fields\Select;
 use A17\Twill\Services\Forms\Fields\Wysiwyg;
+use A17\Twill\Services\Forms\Option;
+use A17\Twill\Services\Forms\Options;
 use A17\Twill\Services\Listings\Columns\Text;
 use A17\Twill\Services\Listings\TableColumns;
 use A17\Twill\Services\Forms\Fields\Input;
 use A17\Twill\Services\Forms\Form;
-use A17\Twill\Http\Controllers\Admin\NestedModuleController as BaseModuleController;
+use A17\Twill\Http\Controllers\Admin\ModuleController as BaseModuleController;
 
 class   OrderController extends BaseModuleController
 {
@@ -33,11 +36,15 @@ class   OrderController extends BaseModuleController
     public function getCreateForm(): Form
     {
         return Form::make([
-            Input::make()->name('type')->label('Type '),
             Input::make()->name('title')->label('Title'),
-            Input::make()->name('client_id')->label('Client_id'),
-            Input::make()->name('product_id')->label('Product_id'),
-            Input::make()->name('service_id')->label('Service_id'),
+            Input::make()->name('user_id')->label('User_id'),
+            Select::make()->name('morphable_type')->options(
+                Options::make([
+                    Option::make('App\\Models\\Product', 'Product'),
+                    Option::make('App\\Models\\Service', 'Service')
+                ])
+            ),
+            Input::make()->name('morphable_id')->label('Product/Service'),
             Input::make()->name('status')->label('Status'),
             Input::make()->name('details')->label('Details'),
             Input::make()->name('position')->label('Position'),
@@ -51,9 +58,7 @@ class   OrderController extends BaseModuleController
         return Form::make([
             Input::make()->name('type')->label('Type'),
             Input::make()->name('title')->label('Title'),
-            Input::make()->name('client_id')->label('Client_id'),
-            Input::make()->name('product_id')->label('Product_id'),
-            Input::make()->name('service_id')->label('Service_id'),
+            Input::make()->name('user_id')->label('User_id'),
             Input::make()->name('status')->label('Status'),
             Input::make()->name('details')->label('Details'),
             Input::make()->name('position')->label('Position'),
@@ -71,25 +76,12 @@ class   OrderController extends BaseModuleController
         $table = parent::additionalIndexTableColumns();
 
         $table->add(
-            Text::make()->field('type')->title('Type')
-        );
-
-        $table->add(
             Text::make()->field('title')->title('Title')
         );
 
         $table->add(
-        Text::make()->field('client_id')->title('Client_id')
+            Text::make()->field('user_id')->title('User_id')
         );
-
-        $table->add(
-            Text::make()->field('product_id')->title('Product_id')
-        );
-
-        $table->add(
-            Text::make()->field('service_id')->title('Service_id')
-        );
-
         $table->add(
             Text::make()->field('status')->title('Status')
         );

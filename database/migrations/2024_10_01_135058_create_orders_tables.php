@@ -9,16 +9,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            // this will create an id, a "published" column, and soft delete and timestamps columns
+            //this will create an id, a "published" column, and soft delete and timestamps columns
             createDefaultTableFields($table);
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('morphable_id');
+            $table->string('morphable_type');
             $table->string('status');
             $table->text('details')->nullable();
 
 
+
+
             $table->index('client_id');
+            $table->index(['morphable_id', 'morphable_type']);
+
             $table->index('product_id');
             $table->index('service_id');
             $table->index('status');

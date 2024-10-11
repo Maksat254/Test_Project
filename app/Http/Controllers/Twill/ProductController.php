@@ -12,7 +12,7 @@ use A17\Twill\Services\Forms\Fields\Medias;
 use A17\Twill\Services\Forms\Form;
 use A17\Twill\Http\Controllers\Admin\ModuleController as BaseModuleController;
 
-use App\Models\Product;
+
 
 //use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
 
@@ -39,6 +39,7 @@ class ProductController extends BaseModuleController
         return Form::make([
             Input::make()->name('name')->label('Product Name'),
             Input::make()->name('type')->label('Type'),
+            Input::make()->name('title')->label('Title'),
             Input::make()->name('price')->label('Price'),
             Input::make()->name('color')->label('Color'),
             Input::make()->name('size')->label('Size'),
