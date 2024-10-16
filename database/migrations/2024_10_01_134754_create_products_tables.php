@@ -15,13 +15,15 @@ return new class extends Migration
             $table->string('color');
             $table->decimal('price');
             $table->integer('size');
-            $table->integer('stock');
             $table->string('image')->nullable();
+            $table->integer('quantity')->default(0);
 
 
             $table->index('type');
             $table->index('color');
             $table->index('price');
+            $table->index('quantity');
+
 
             // feel free to modify the name of this column, but title is supported by default (you would need to specify the name of the column Twill should consider as your "title" column in your module controller if you change it)
             $table->string('title', 200)->nullable();

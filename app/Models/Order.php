@@ -12,6 +12,7 @@ use A17\Twill\Models\Behaviors\HasNesting;
 use A17\Twill\Models\Behaviors\Sortable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use A17\Twill\Models\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model implements Sortable
 {
@@ -26,16 +27,21 @@ class Order extends Model implements Sortable
         'morphable_type',
         'morphable_id',
         'status',
-        'details',
+        'quantity',
     ];
 
     public $slugAttributes = [
         'title',
     ];
 
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function morphable()
     {
-        return $this->morphTo();
+        return $this->morphTo('morphable');
     }
 
 }

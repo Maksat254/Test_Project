@@ -12,6 +12,7 @@ use A17\Twill\Services\Listings\TableColumns;
 use A17\Twill\Services\Forms\Fields\Input;
 use A17\Twill\Services\Forms\Form;
 use A17\Twill\Http\Controllers\Admin\ModuleController as BaseModuleController;
+use App\Models\User;
 
 class   OrderController extends BaseModuleController
 {
@@ -46,7 +47,7 @@ class   OrderController extends BaseModuleController
             ),
             Input::make()->name('morphable_id')->label('Product/Service'),
             Input::make()->name('status')->label('Status'),
-            Input::make()->name('details')->label('Details'),
+            Input::make()->name('quantity')->label('Quantity'),
             Input::make()->name('position')->label('Position'),
             Wysiwyg::make()->name('description')->label('Description')
         ]);
@@ -60,7 +61,7 @@ class   OrderController extends BaseModuleController
             Input::make()->name('title')->label('Title'),
             Input::make()->name('user_id')->label('User_id'),
             Input::make()->name('status')->label('Status'),
-            Input::make()->name('details')->label('Details'),
+            Input::make()->name('quantity')->label('Quantity'),
             Input::make()->name('position')->label('Position'),
             Wysiwyg::make()->name('description')->label('Description')
         ]);
@@ -80,14 +81,26 @@ class   OrderController extends BaseModuleController
         );
 
         $table->add(
-            Text::make()->field('user_id')->title('User_id')
+            Text::make()->field('user_id')->title('USER')->customRender(function ($order) {
+                $user = User::find($order->user_id);
+                return $user ? $user->name : 'Unknown';
+            }),
         );
+
+        $table->add(
+            Text::make()->field('morphable_type')->title('Product/Service')->customRender(function ($order) {
+                $type = explode('\\', $order->orderable_type);
+                $type = end($type);
+                return "$type: " . $order->orderable->type;
+            })
+        );
+
         $table->add(
             Text::make()->field('status')->title('Status')
         );
 
         $table->add(
-            Text::make()->field('details')->title('Details')
+            Text::make()->field('quantity')->title('Details')
         );
 
         $table->add(

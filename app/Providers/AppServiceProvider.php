@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+
         $modules = ['products', 'services', 'orders'];
         foreach ($modules as $module) {
             TwillNavigation::addLink(NavigationLink::make()->forModule($module));

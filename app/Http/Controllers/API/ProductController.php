@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Cache::rememberForever('products', function () use ($request) {
+        $products = Cache::remember('products', 60, function () use ($request) {
 
          $query = Product::query();
 

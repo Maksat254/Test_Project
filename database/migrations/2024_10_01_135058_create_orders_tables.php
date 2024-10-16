@@ -11,16 +11,16 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             //this will create an id, a "published" column, and soft delete and timestamps columns
             createDefaultTableFields($table);
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('morphable_id');
             $table->string('morphable_type');
             $table->string('status');
-            $table->text('details')->nullable();
+            $table->integer('quantity')->default(1);
 
 
 
 
-            $table->index('client_id');
+            $table->index('user_id');
             $table->index(['morphable_id', 'morphable_type']);
 
             $table->index('product_id');
