@@ -25,6 +25,7 @@ class   OrderController extends BaseModuleController
     protected function setUpController(): void
     {
         $this->enableReorder();
+        $this->disableCreate();
     }
 
 

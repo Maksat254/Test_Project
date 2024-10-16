@@ -18,12 +18,6 @@ class OrderController extends Controller
     {
         $orders = Cache::remember('orders.page' . $request->page, 60, function () use ($request){
             return Order::with('user', 'morphable')
-                ->when($request->has('status'), function ($query) use ($request){
-                    $query->where('status', $request->status);
-                })
-                ->when($request->has('sort_by'), function ($query) use ($request) {
-                    $query->orderBy($request->sort_by, $request->get('order', 'asc'));
-                })
                 ->paginate(10);
         });
         return response()->json($orders);
