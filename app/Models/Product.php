@@ -27,7 +27,7 @@ class Product extends Model implements Sortable
         'price',
         'color',
         'size',
-        'stock',
+        'quantity',
         'cover',
     ];
         public $mediasParams = [
