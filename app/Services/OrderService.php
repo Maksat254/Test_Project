@@ -26,11 +26,11 @@ class OrderService
         }
 
         $order = new Order($request->validated());
-        $order->user_id = $request->user()->id;
+        $order = new Order();
+       $order->user_id = $request->user()->id;
         $model->orders()->save($order);
 
-        $user = auth()->user();
-        dd($user);
+
 
         return $order;
     }

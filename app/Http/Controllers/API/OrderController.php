@@ -9,6 +9,7 @@ use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Events\OrderCreated;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -31,6 +32,7 @@ class OrderController extends Controller
 
     public function store(StoreOrderRequest $request)
     {
+
         $order = $this->orderService->createOrder($request);
 
         event(new OrderCreated($order));

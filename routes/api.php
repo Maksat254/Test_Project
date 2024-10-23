@@ -12,6 +12,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
-    Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('order.show');
+    Route::post('/orders', [OrderController::class, 'store'])->name('order.store');
 });
