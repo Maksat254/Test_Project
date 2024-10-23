@@ -92,7 +92,7 @@ class   OrderController extends BaseModuleController
             Text::make()->field('morphable_type')->title('Product/Service')->customRender(function ($order) {
                 $type = explode('\\', $order->orderable_type);
                 $type = end($type);
-                return "$type: " . $order->orderable->type;
+                return "$type: " . $order->orderable;
             })
         );
 

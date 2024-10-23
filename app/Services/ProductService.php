@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class ProductService
 {
+
+    public function createProduct(Request $request)
+    {
+        $product = Product::create([
+            'name' => $request->input('name'),
+            'quantity' => $request->input('quantity'),
+            'price' => $request->input('price'),
+        ]);
+
+        return $product;
+    }
+
+
+
     public function filterAndSortProducts(Request $request)
     {
         $query = Product::query();
@@ -19,8 +33,8 @@ class ProductService
             $query->where('size', $request->input('size'));
         }
 
-        if ($request->has('in_stock')) {
-            $query->where('in_stock', $request->input('in_stock'));
+        if ($request->has('quantity')) {
+            $query->where('quantity', $request->input('quantity'));
         }
 
         if ($request->has('min_price')) {
