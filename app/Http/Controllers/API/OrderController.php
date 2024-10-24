@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Events\OrderCreated;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderCreateNotification;
 
 class OrderController extends Controller
 {
@@ -36,6 +38,8 @@ class OrderController extends Controller
         $order = $this->orderService->createOrder($request);
 
         event(new OrderCreated($order));
+
+        Mail::to(auth()-user())->send(new OrderCreateNotification(auth()-user(),$order));
 
         return response()->json($order, 201);
     }
